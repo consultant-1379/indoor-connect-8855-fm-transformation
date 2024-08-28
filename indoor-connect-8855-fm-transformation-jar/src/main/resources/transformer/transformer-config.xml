@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t:model-transformer-config id="Indoor-connect-8855" version="1.0.0" xmlns:j="jelly:core" xmlns:t="jelly:enm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <t:model-transformer-imports>
+        <t:import-transformer-config file="ERICSSON-ALARM-IRP-MIB-v12.mi2-enums.xml" />
+    </t:model-transformer-imports>
+    <t:properties>
+        <t:app-property name="equals" type="java.lang.String">lo</t:app-property>
+    </t:properties>
+<t:model-transformers>  
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5" description="indoor-connect-8855AlarmActiveAlarmTable">
+<t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.5" mappedBy="managedObjectInstance" />
+<t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.4" mappedBy="specificProblem" />
+<t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.12" attributeName="additionalText" />
+<t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.14" attributeName="additionalInfo" />
+<t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.1" attributeName="generatedAlarmId"/>
+<t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.2" attributeName="majorType"/>
+<t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.3" attributeName="minorType"/>
+<t:convert-set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.10" mappedBy="perceivedSeverity" converter="SnmpStringUppercaseConverter" />
+<t:convert-set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.7" mappedBy="eventTime"
+                                          converter="SnmpDateModelConverter" args="format=yyyyMMddHHmmss.SSS"/>
+<t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.6" mappedBy="eventType"/>
+<!--<t:process-model-property oid=".1.3.6.1.4.1.193.183.4.1.3.5.1.7" processor = "TimeZoneModelProcessor" />-->
+<t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.9" mappedBy="probableCause"/>
+<t:evaluate-set-model-property mappedBy="recordType"
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=SYNCHRONIZATION_ALARM" />
+</t:model-transformer>
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5" description="indoor-connect-8855AlarmAlertTable">
+<t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.5" mappedBy="managedObjectInstance" />
+<t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.4" mappedBy="specificProblem" />
+<t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.1" attributeName="generatedAlarmId"/>
+<t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.2" attributeName="majorType"/>
+<t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.3" attributeName="minorType"/>         
+<t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.10" attributeName="targetAdditionaltext" />
+<t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.12" attributeName="targetAdditionalInfo" />
+<t:convert-set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.9" mappedBy="perceivedSeverity" converter="SnmpStringUppercaseConverter" />
+<t:convert-set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.7" mappedBy="eventTime"
+                                          converter="SnmpDateModelConverter" args="format=yyyyMMddHHmmss.SSS"/>
+<t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.6" mappedBy="eventType"/>
+<!-- <t:process-model-property oid=".1.3.6.1.4.1.193.183.4.1.4.5.1.7" processor = "TimeZoneModelProcessor" />-->
+<t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.8" mappedBy="probableCause"/>
+<t:evaluate-set-model-property mappedBy="recordType"
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=SYNCHRONIZATION_ALARM" />
+</t:model-transformer>
+
+<t:define-model-transformer name ="indoor-snmp-ecim-transformer">
+    <t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.5" mappedBy="managedObjectInstance" />
+    <t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.4" mappedBy="specificProblem" />
+    <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.12" attributeName="additionalText" />
+    <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.14" attributeName="additionalInfo" />
+    <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.1" attributeName="generatedAlarmId"/>
+    <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.2" attributeName="majorType"/>
+    <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.3" attributeName="minorType"/>
+    <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.3" attributeName="sequenceNumber"/>
+    <t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.6" mappedBy="eventType"/>
+    <t:convert-set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.7" mappedBy="eventTime"
+                                    converter="SnmpDateModelConverter" args="format=yyyyMMddHHmmss.SSS"/>
+    <t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.9" mappedBy="probableCause"/>
+    <t:evaluate-set-model-property mappedBy="recordType"
+                                    evaluator="SimpleModelEvaluator"
+                                   args="value=ALARM" />
+</t:define-model-transformer>
+
+<t:define-model-transformer name="base-snmp-alert-ecim-transformer">
+    <t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.5" mappedBy="managedObjectInstance" />
+    <t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.4" mappedBy="specificProblem" />
+    <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.10" attributeName="targetAdditionaltext" />
+    <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.12" attributeName="targetAdditionalInfo" />	
+    <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.1" attributeName="generatedAlarmId"/>
+    <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.3" attributeName="minorType"/> 
+    <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.2" attributeName="majorType"/>
+    <t:convert-set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.7" mappedBy="eventTime"
+                                          converter="SnmpDateModelConverter" args="format=yyyyMMddHHmmss.SSS"/>
+    <t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.6" mappedBy="eventType"/>
+    <t:set-model-property oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.8" mappedBy="probableCause"/>
+    <t:evaluate-set-model-property mappedBy="recordType"
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=ERROR_MESSAGE" />
+</t:define-model-transformer>
+
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.2.1.9" description="EriAlarmWarningTrap">
+    <t:include-model-transformer transformer="base-snmp-alert-ecim-transformer"/>
+    <t:evaluate-set-model-property mappedBy="perceivedSeverity" 
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=WARNING" />
+</t:model-transformer>
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.2.1.10" description="EriAlarmMinorTrap">
+    <t:include-model-transformer transformer="base-snmp-alert-ecim-transformer"/>
+    <t:evaluate-set-model-property mappedBy="perceivedSeverity" 
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=MINOR" />
+</t:model-transformer>
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.2.1.11" description="EriAlarmMajorTrap">
+    <t:include-model-transformer transformer="base-snmp-alert-ecim-transformer"/>
+    <t:evaluate-set-model-property mappedBy="perceivedSeverity" 
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=MAJOR" />
+</t:model-transformer>
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.2.1.12" description="EriAlarmCriticalTrap">
+    <t:include-model-transformer transformer="base-snmp-alert-ecim-transformer"/>
+    <t:evaluate-set-model-property mappedBy="perceivedSeverity" 
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=CRITICAL" />
+</t:model-transformer>
+
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.2.1.2" description="EriAlarmWarningTrap">
+    <t:include-model-transformer transformer="indoor-snmp-ecim-transformer"/>
+    <t:evaluate-set-model-property mappedBy="perceivedSeverity" 
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=WARNING" />
+</t:model-transformer>
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.2.1.3" description="EriAlarmMinorTrap">
+    <t:include-model-transformer transformer="indoor-snmp-ecim-transformer"/>
+    <t:evaluate-set-model-property mappedBy="perceivedSeverity" 
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=MINOR" />
+</t:model-transformer>
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.2.1.4" description="EriAlarmMajorTrap">
+    <t:include-model-transformer transformer="indoor-snmp-ecim-transformer"/>
+    <t:evaluate-set-model-property mappedBy="perceivedSeverity" 
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=MAJOR" />
+</t:model-transformer>
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.2.1.5" description="EriAlarmCriticalTrap">
+    <t:include-model-transformer transformer="indoor-snmp-ecim-transformer"/>
+    <t:evaluate-set-model-property mappedBy="perceivedSeverity" 
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=CRITICAL" />
+</t:model-transformer>
+
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.2.1.6" description="EriAlarmClearedTrap">
+    <t:include-model-transformer transformer="indoor-snmp-ecim-transformer"/>
+    <t:evaluate-set-model-property mappedBy="perceivedSeverity" 
+                                           evaluator="SimpleModelEvaluator"
+                                           args="value=CLEARED" />
+</t:model-transformer>
+
+<t:model-transformer id=".1.3.6.1.4.1.193.235.1.1.2.1.2.1.14" description="EriAlarmHeartBeatNotif">
+              <t:set-model-attribute oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.3" attributeName="sequenceNumber"/>
+              <t:evaluate-set-model-property mappedBy="recordType"
+                                             evaluator="SimpleModelEvaluator"
+                                             args="value=HEARTBEAT" />
+ </t:model-transformer>
+ 
+</t:model-transformers>
+</t:model-transformer-config>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************************* 
+    * COPYRIGHT Ericsson LMI 2017. All rights reserved. * * No part of this document 
+    may be reproduced in any form without the * written permission of the copyright 
+    owner.The contents of this document * are subject to revision without notice 
+    due to continued progress in * methodology, design and manufacturing. Ericsson 
+    shall have no liability * for any error or damage of any kind resulting from 
+    the use of this document. 
+    * ******************************************************************************* -->
+<snmp-mediation-config>
+   <network-element type="Indoor-connect-8855" version="1.0.0">
+
+      <alarms-get-config>
+         <alarm-entry-config id="01">
+          <!-- RAU-ALARM-MIB::rauAlarmActiveAlarmTable -->
+            <snmp-table oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5">
+               <!-- filters on fields (read only following fields ) -->
+					<!-- RAU-ALARM-MIB::rauAlarmActiveMinorType -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.3" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveMajorType -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.2" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveSpecificProblem -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.4" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveManagedObject -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.5" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveEventType -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.6" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveEventTime -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.7" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveProbableCause -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.9" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveSeverity -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.10" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveAdditionalText -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.12" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveAdditionalInfo -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.3.5.1.14" />
+            </snmp-table>
+         </alarm-entry-config>
+         <alarm-entry-config id="02">
+          <!-- RAU-ALARM-MIB::rauAlarmActiveAlarmTable -->
+            <snmp-table oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5">
+               <!-- filters on fields (read only following fields ) -->
+					<!-- RAU-ALARM-MIB::rauAlarmActiveMinorType -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.3" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveMajorType -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.2" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveSpecificProblem -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.4" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveManagedObject -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.5" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveEventType -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.6" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveEventTime -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.7" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveProbableCause -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.8" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveSeverity -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.9" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveAdditionalText -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.10" />
+					<!-- RAU-ALARM-MIB::rauAlarmActiveAdditionalInfo -->
+					<snmp-field oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.4.5.1.12" />
+            </snmp-table>
+         </alarm-entry-config>
+      </alarms-get-config>
+	   <!-- configuration for heartbeat mode=push; the snmp-object is the object for set interval -->
+					<heartbeat-push-config>
+						<heartbeat-interval-config time-unit="seconds">
+							<!-- SNMP Object for Heart Beat set interval: rauAlarmHbInterval.0 -->
+							<snmp-object oid=".1.3.6.1.4.1.193.235.1.1.2.1.1.5.1.0" />
+						</heartbeat-interval-config>
+					</heartbeat-push-config>
+
+      <event-notification-defaults>
+         <attribute name="sourceType">Indoor-connect-8855</attribute>
+      </event-notification-defaults>
+      <properties>
+        <!-- SNMP Object fot get last sequence number: rauAlarmActiveLastSequenceNo -->
+         <property name="lastSequenceNumberObject">RAU-ALARM-MIB::.1.3.6.1.4.1.193.235.1.1.2.1.1.3.3.0</property>
+         <!-- SNMP Connection Default Parameters -->
+         <property name="snmpRetries">1</property>    <!-- number of retries -->
+         <property name="snmpTimeout">15000</property> <!-- snmpTimeout in milliseconds -->
+         <property name="snmpTrapPort">162</property>
+         <property name="snmpWriteCommunity">public</property>                        
+      </properties>
+   </network-element>
+</snmp-mediation-config>
+
+

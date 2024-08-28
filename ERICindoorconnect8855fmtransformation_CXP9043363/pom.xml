@@ -1,0 +1,107 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ericsson.oss.mediation.fm</groupId>
+		<artifactId>indoor-connect-8855-fm-transformation</artifactId>
+		<version>1.2.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>ERICindoorconnect8855fmtransformation_CXP9043363</artifactId>
+	<packaging>rpm</packaging>
+	<name>[${project.parent.artifactId}] RPM module</name>
+	<description>RPM module</description>
+	<properties>
+		<!-- RPM build properties -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<rpm.name>${project.artifactId}</rpm.name>
+		<rpm.version>${project.version}</rpm.version>
+		<!-- Depending on the type of model this path can be of two types -->
+		<!-- /var/opt/ericsson/ERICmodeldeployment/data/install -->
+		<!-- /var/opt/ericsson/ERICmodeldeployment/data/post-install 
+		<model-install-path>/var/opt/ericsson/ERICmodeldeployment/data/install</model-install-path> -->
+		<rpm-root>etc/opt</rpm-root>
+		<comp-name>ericsson</comp-name>
+		<install-path>snmp/mediation/snmp-mediation-config</install-path>
+		<model-xml.name>indoor-connect-8855-fm-transformation-jar</model-xml.name>
+		<media.category>service</media.category>
+		<publish_artifact>true</publish_artifact>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>timestamp-property</id>
+						<goals>
+							<goal>timestamp-property</goal>
+						</goals>
+						<configuration>
+							<name>this.year</name>
+							<pattern>yyyy</pattern>
+							<unit>year</unit>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-indoor-connect-8855-fm-transformation-jar</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.parent.artifactId}-jar</artifactId>
+									<version>${project.version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>target/${install-path}</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration combine.self="override">
+					<license>${this.year} Ericsson AB. All rights reserved</license>
+					<name>${rpm.name}</name>
+					<versionProperty>${rpm.version}</versionProperty>
+					<group>ERI-NMS</group>
+					<release>2</release>
+					<url>www.ericsson.com</url>
+					<vendor>Ericsson AB</vendor>
+					<summary>${project.artifactId}</summary>
+					<mappings>
+						<mapping>
+							<directory>/${rpm-root}/${comp-name}/${install-path}</directory>
+							<filemode>550</filemode>
+							<username>${jboss-username}</username>
+							<groupname>${jboss-groupname}</groupname>
+							<configuration>false</configuration>
+							<!-- directoryIncluded should always be set to 'false' -->
+							<directoryIncluded>false</directoryIncluded>
+							<recurseDirectories>false</recurseDirectories>
+							<sources>
+								<source>
+									<location>target/${install-path}</location>
+								</source>
+							</sources>
+						</mapping>
+					</mappings>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
